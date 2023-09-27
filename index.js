@@ -28,6 +28,18 @@ prompt.get(['option'],(err,result)=>{
             //salvar o texto em uma pasta
             const text = result.text ;
             fs.writeFileSync(`texts/texts-${Date.now()}.txt`, text);
+            playAudio(text);
         });
     }
-})
+});
+
+//play audio
+
+function playAudio(text) {
+    say.speak(text, "", 0.8, (err)=>{
+        if(err){
+            console.err(chalk.bgRed(err));
+        }
+        console.log(chalk.green("Audio gerado com sucesso!"));
+    })
+}
